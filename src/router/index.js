@@ -21,6 +21,7 @@ const router = createRouter({
     { path: '/catalog', name: 'catalog', component: CatalogView },
     { path: '/write', name: 'write', component: WriteView },
     { path: '/ai', name: 'ai', component: AiView },
+    { path: '/settings', name: 'settings', component: () => import('../views/SettingsView.vue') },
     { path: '/search', name: 'search', component: () => import('../views/SearchView.vue') },
     { path: '/auth', name: 'auth', component: () => import('../views/AuthView.vue') },
     
