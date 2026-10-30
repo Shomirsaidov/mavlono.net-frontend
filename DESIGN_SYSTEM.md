@@ -36,18 +36,18 @@ Generated using ui-ux-pro-max + frontend-design + web-design-guidelines skills.
 
 **Google Fonts Import:**
 ```css
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600&display=swap');
 ```
 
 | Role | Font | Weight | Size |
 |------|------|--------|------|
-| Display / Poem Title | `Cormorant Garamond` | 500–700 | 2rem–4rem |
-| Poem Body Text | `Cormorant Garamond Italic` | 400 | 1.4rem–1.8rem |
+| Display / Poem Title | `Lora` | 500–700 | 2rem–4rem |
+| Poem Body Text | `Lora Italic` | 400 | 1.4rem–1.8rem |
 | Poet Name / Headings | `Libre Baskerville` | 400–700 | 1.1rem–1.6rem |
 | UI Labels / Nav / Meta | `Inter` | 400–600 | 0.75rem–1rem |
 
 **Rules:**
-- Poem content renders in `Cormorant Garamond italic` at minimum `1.5rem` with `2rem` line-height
+- Poem content renders in `Lora italic` at minimum `1.5rem` with `2rem` line-height
 - General UI (buttons, labels) uses `Inter`
 - Never mix more than 3 fonts
 
@@ -76,7 +76,7 @@ Generated using ui-ux-pro-max + frontend-design + web-design-guidelines skills.
 - Background: `--color-surface`
 - Border: `1px solid --color-border` + left accent `3px solid --color-gold`
 - Hover: background shifts to `--color-surface-2`, subtle upward `translateY(-2px)` lift
-- Poem text: Cormorant Garamond Italic, `1.4rem`, line-height `2rem`
+- Poem text: Lora Italic, `1.4rem`, line-height `2rem`
 - Poet name: Libre Baskerville, `0.95rem`
 
 ### Sidebar
