@@ -269,7 +269,7 @@
 
 <script setup>
 import { onMounted, onBeforeUnmount } from 'vue'
-import { lang, setLang } from '../i18n'
+import { lang, setLang, hasStoredLang, setLangTemporarily } from '../i18n'
 
 const year = new Date().getFullYear()
 
@@ -357,6 +357,11 @@ const animateCount = (el) => {
   requestAnimationFrame(tick)
 }
 
+// New visitors who haven't chosen a language see the landing page in English;
+// the rest of the app keeps its Tajik default.
+const usingLandingDefault = !hasStoredLang()
+if (usingLandingDefault) setLangTemporarily('en')
+
 onMounted(() => {
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
   const targets = document.querySelectorAll('.landing .reveal')
@@ -375,7 +380,10 @@ onMounted(() => {
   targets.forEach((el) => observer.observe(el))
 })
 
-onBeforeUnmount(() => observer && observer.disconnect())
+onBeforeUnmount(() => {
+  if (observer) observer.disconnect()
+  if (usingLandingDefault && !hasStoredLang()) setLangTemporarily('tg')
+})
 </script>
 
 <style scoped>

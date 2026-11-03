@@ -16,6 +16,18 @@ const readStoredLang = () => {
 
 export const lang = ref(readStoredLang())
 
+// True once the visitor has picked a language themselves (persisted in localStorage).
+export const hasStoredLang = () => {
+  try { return SUPPORTED.includes(localStorage.getItem(STORAGE_KEY)) } catch (e) { return false }
+}
+
+// Applies a language for the current page view only, without remembering it.
+export const setLangTemporarily = (value) => {
+  if (!SUPPORTED.includes(value)) return
+  lang.value = value
+  document.documentElement.lang = value
+}
+
 export const setLang = (value) => {
   if (!SUPPORTED.includes(value)) return
   lang.value = value
