@@ -1,12 +1,12 @@
 <template>
   <div class="antialiased font-sans text-text-main bg-bg min-h-screen">
     <!-- Desktop Sidebar -->
-    <Sidebar v-if="!isAdmin" class="hidden md:flex fixed top-0 left-0 bottom-0 w-[260px] z-50 overflow-y-auto" />
+    <Sidebar v-if="showChrome" class="hidden md:flex fixed top-0 left-0 bottom-0 w-[260px] z-50 overflow-y-auto" />
 
     <!-- Main Content Area -->
-    <main :class="[isAdmin ? 'ml-0' : 'md:ml-[260px]']" class="min-h-screen flex flex-col transition-all">
+    <main :class="[showChrome ? 'md:ml-[260px]' : 'ml-0']" class="min-h-screen flex flex-col transition-all">
       <!-- Mobile Header -->
-      <header v-if="!isAdmin" class="md:hidden sticky top-0 bg-surface border-b border-border px-6 py-4 flex items-center justify-between z-40">
+      <header v-if="showChrome" class="md:hidden sticky top-0 bg-surface border-b border-border px-6 py-4 flex items-center justify-between z-40">
         <img src="/assets/brand/logo-horizontal.png" alt="mavlono" class="h-6">
         <router-link to="/search" class="text-text-muted hover:text-indigo">
           <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
@@ -14,17 +14,17 @@
       </header>
 
       <!-- Page Content -->
-      <div :class="[isAdmin ? 'max-w-none px-0 py-0' : 'max-w-4xl mx-auto w-full px-6 py-8 md:px-12 md:py-10']" class="flex-1">
+      <div :class="[showChrome ? 'max-w-4xl mx-auto w-full px-6 py-8 md:px-12 md:py-10' : 'max-w-none px-0 py-0']" class="flex-1">
         <router-view :key="$route.fullPath" />
       </div>
 
       <!-- Mobile Spacer -->
-      <div v-if="!isAdmin" class="md:hidden h-24"></div>
+      <div v-if="showChrome" class="md:hidden h-24"></div>
     </main>
   </div>
 
   <!-- Mobile bottom nav -->
-  <nav v-if="!isAdmin" class="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-t border-border pb-safe">
+  <nav v-if="showChrome" class="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-t border-border pb-safe">
     <div class="grid grid-cols-5 max-w-lg mx-auto">
       <router-link to="/" class="flex flex-col items-center py-2 transition-all" v-slot="{ isActive, navigate }">
         <button @click="navigate" class="flex flex-col items-center justify-center w-full" :class="isActive && $route.path === '/' ? 'text-indigo' : 'text-text-faint'">
@@ -69,9 +69,14 @@
 import { computed } from 'vue'
 import { useRoute } from 'vue-router'
 import Sidebar from './components/Layout/Sidebar.vue'
+import { useAuthStore } from './stores/auth'
 
 const route = useRoute()
+const auth = useAuthStore()
 const isAdmin = computed(() => route.path.startsWith('/admin'))
+// Signed-out visitors see the full-width landing page at "/" without the app chrome
+const isLanding = computed(() => route.path === '/' && !auth.isAuthenticated)
+const showChrome = computed(() => !isAdmin.value && !isLanding.value)
 </script>
 
 <style>
