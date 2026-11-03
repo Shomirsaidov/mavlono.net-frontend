@@ -34,14 +34,10 @@
     </div>
 
     <!-- Stats -->
-    <div class="grid grid-cols-3 gap-3 md:gap-4 mb-8">
+    <div class="grid grid-cols-2 gap-3 md:gap-4 mb-8">
       <div class="bg-surface rounded-xl p-3 md:p-5 border border-border shadow-sm text-center">
         <div class="text-xl md:text-2xl font-bold text-indigo">{{ poet.subscriptions?.length || 0 }}</div>
         <div class="text-[0.6rem] md:text-[0.7rem] font-bold text-text-faint uppercase tracking-wider mt-1">Обунагирон</div>
-      </div>
-      <div class="bg-surface rounded-xl p-3 md:p-5 border border-border shadow-sm text-center">
-        <div class="text-xl md:text-2xl font-bold text-indigo">{{ poems.length }}</div>
-        <div class="text-[0.6rem] md:text-[0.7rem] font-bold text-text-faint uppercase tracking-wider mt-1">Шеърҳо</div>
       </div>
       <div class="bg-surface rounded-xl p-3 md:p-5 border border-border shadow-sm text-center">
         <div class="text-xl md:text-2xl font-bold text-indigo">{{ totalLikes }}</div>
