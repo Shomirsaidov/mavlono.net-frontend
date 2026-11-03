@@ -2,8 +2,8 @@
   <div class="space-y-8">
     <div class="flex flex-col md:flex-row md:items-center justify-between gap-6">
       <div>
-        <h2 class="text-3xl font-serif font-bold text-text-main mb-2">Шеърҳо</h2>
-        <p class="text-xs font-bold text-text-faint uppercase tracking-widest">Идоракунии мундариҷа</p>
+        <h2 class="text-3xl font-serif font-bold text-text-main mb-2">{{ $t('Шеърҳо') }}</h2>
+        <p class="text-xs font-bold text-text-faint uppercase tracking-widest">{{ $t('Идоракунии мундариҷа') }}</p>
       </div>
       <div class="flex items-center gap-3">
         <div class="relative">
@@ -11,7 +11,7 @@
           <input 
             v-model="searchQuery" 
             type="text" 
-            placeholder="Ҷустуҷӯ..." 
+            :placeholder="$t('Ҷустуҷӯ...')" 
             class="input-base pl-12 rounded-2xl w-full md:w-64"
           />
         </div>
@@ -25,9 +25,9 @@
           <thead>
             <tr class="bg-gray-50/50 border-b border-border">
               <th class="px-8 py-5 text-[0.65rem] font-black text-indigo uppercase tracking-widest">ID</th>
-              <th class="px-8 py-5 text-[0.65rem] font-black text-indigo uppercase tracking-widest">Мундариҷа</th>
-              <th class="px-8 py-5 text-[0.65rem] font-black text-indigo uppercase tracking-widest">Муаллиф</th>
-              <th class="px-8 py-5 text-[0.65rem] font-black text-indigo uppercase tracking-widest text-right">Амалҳо</th>
+              <th class="px-8 py-5 text-[0.65rem] font-black text-indigo uppercase tracking-widest">{{ $t('Мундариҷа') }}</th>
+              <th class="px-8 py-5 text-[0.65rem] font-black text-indigo uppercase tracking-widest">{{ $t('Муаллиф') }}</th>
+              <th class="px-8 py-5 text-[0.65rem] font-black text-indigo uppercase tracking-widest text-right">{{ $t('Амалҳо') }}</th>
             </tr>
           </thead>
           <tbody class="divide-y divide-border/50">
@@ -42,7 +42,7 @@
               </td>
               <td class="px-8 py-5">
                 <div class="flex items-center gap-3">
-                  <span class="font-bold text-sm text-text-main">{{ poem.poet?.name || 'Номаълум' }}</span>
+                  <span class="font-bold text-sm text-text-main">{{ poem.poet?.name || $t('Номаълум') }}</span>
                 </div>
               </td>
               <td class="px-8 py-5 text-right">
@@ -64,34 +64,34 @@
       </div>
       <div v-if="loading" class="p-20 flex flex-col items-center justify-center text-text-faint gap-4">
         <span class="animate-spin h-8 w-8 border-4 border-indigo/20 border-t-indigo rounded-full"></span>
-        <span class="text-xs font-bold uppercase tracking-widest">Боргузорӣ...</span>
+        <span class="text-xs font-bold uppercase tracking-widest">{{ $t('Боргузорӣ...') }}</span>
       </div>
       <div v-else-if="filteredPoems.length === 0" class="p-20 text-center text-text-faint">
-        Шеър ёфт нашуд.
+        {{ $t('Шеър ёфт нашуд.') }}
       </div>
     </div>
 
     <!-- View Modal -->
     <BaseModal v-model="isViewModalOpen">
       <template #header>
-        <span class="text-[0.65rem] font-black text-indigo uppercase tracking-widest">Тафсилоти шеър #{{ activePoem?.id }}</span>
+        <span class="text-[0.65rem] font-black text-indigo uppercase tracking-widest">{{ $t('Тафсилоти шеър #{n}', { n: activePoem?.id }) }}</span>
       </template>
       <div class="font-serif text-2xl leading-[2] text-gray-800 italic whitespace-pre-wrap">
         {{ normalizeBreaks(activePoem?.content) }}
       </div>
       <template #footer>
-        <button @click="isViewModalOpen = false" class="btn btn-outline">Бастан</button>
+        <button @click="isViewModalOpen = false" class="btn btn-outline">{{ $t('Бастан') }}</button>
       </template>
     </BaseModal>
 
     <!-- Edit Modal -->
     <BaseModal v-model="isEditModalOpen" maxWidth="3xl">
       <template #header>
-        <h3 class="text-xl font-serif font-bold text-text-main">Таҳрири шеър</h3>
+        <h3 class="text-xl font-serif font-bold text-text-main">{{ $t('Таҳрири шеър') }}</h3>
       </template>
       <form @submit.prevent="handleUpdate" class="space-y-6">
         <div>
-          <label class="block text-[0.65rem] font-black text-indigo uppercase tracking-widest mb-3 ml-1">Матни шеър</label>
+          <label class="block text-[0.65rem] font-black text-indigo uppercase tracking-widest mb-3 ml-1">{{ $t('Матни шеър') }}</label>
           <textarea 
             v-model="editForm.content"
             rows="10"
@@ -101,20 +101,20 @@
         </div>
         <div class="grid grid-cols-2 gap-4">
           <div>
-            <label class="block text-[0.65rem] font-black text-indigo uppercase tracking-widest mb-3 ml-1">Жанр</label>
+            <label class="block text-[0.65rem] font-black text-indigo uppercase tracking-widest mb-3 ml-1">{{ $t('Жанр') }}</label>
             <input v-model="editForm.genre" type="text" class="input-base" />
           </div>
           <div>
-            <label class="block text-[0.65rem] font-black text-indigo uppercase tracking-widest mb-3 ml-1">Барчаспҳо</label>
+            <label class="block text-[0.65rem] font-black text-indigo uppercase tracking-widest mb-3 ml-1">{{ $t('Барчаспҳо') }}</label>
             <input v-model="editForm.tags" type="text" class="input-base" />
           </div>
         </div>
       </form>
       <template #footer>
-        <button @click="isEditModalOpen = false" class="btn btn-outline">Бекор кардан</button>
+        <button @click="isEditModalOpen = false" class="btn btn-outline">{{ $t('Бекор кардан') }}</button>
         <button @click="handleUpdate" :disabled="saving" class="btn btn-indigo">
           <span v-if="saving" class="animate-spin h-4 w-4 border-2 border-white/30 border-t-white rounded-full"></span>
-          {{ saving ? 'Ҳифз...' : 'Ҳифз кардан' }}
+          {{ saving ? $t('Ҳифз...') : $t('Ҳифз кардан') }}
         </button>
       </template>
     </BaseModal>
@@ -125,13 +125,13 @@
         <div class="w-12 h-12 rounded-full bg-heart/10 flex items-center justify-center text-heart mb-4 mx-auto">
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/><line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/></svg>
         </div>
-        <h3 class="text-xl font-bold text-center text-text-main">Нест кардани шеър</h3>
+        <h3 class="text-xl font-bold text-center text-text-main">{{ $t('Нест кардани шеър') }}</h3>
       </template>
-      <p class="text-center text-text-muted">Оё шумо мутмаин ҳастед, ки мехоҳед ин шеърро нест кунед? Ин амалро баргардонда намешавад.</p>
+      <p class="text-center text-text-muted">{{ $t('Оё шумо мутмаин ҳастед, ки мехоҳед ин шеърро нест кунед? Ин амалро баргардонда намешавад.') }}</p>
       <template #footer>
-        <button @click="isDeleteModalOpen = false" class="btn btn-outline flex-1">Бекор кардан</button>
+        <button @click="isDeleteModalOpen = false" class="btn btn-outline flex-1">{{ $t('Бекор кардан') }}</button>
         <button @click="handleDelete" :disabled="saving" class="btn bg-heart text-white hover:bg-red-700 flex-1">
-          {{ saving ? 'Нест карда истодааст...' : 'Ҳа, нест кун' }}
+          {{ saving ? $t('Нест карда истодааст...') : $t('Ҳа, нест кун') }}
         </button>
       </template>
     </BaseModal>

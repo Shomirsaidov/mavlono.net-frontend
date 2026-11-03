@@ -4,7 +4,7 @@
     <div v-for="n in 8" :key="n" class="skeleton h-6 w-full mb-4"></div>
   </div>
 
-  <div v-else-if="!poem" class="empty-state"><p>Шеър ёфт нашуд.</p></div>
+  <div v-else-if="!poem" class="empty-state"><p>{{ $t('Шеър ёфт нашуд.') }}</p></div>
 
   <div v-else>
     <div class="flex items-center justify-between mb-10">
@@ -35,7 +35,7 @@
       
       <div class="flex items-center gap-2 text-text-faint text-sm font-medium">
         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
-        {{ poem.views?.length || 0 }} бор хонда шуд
+        {{ $t('{n} бор хонда шуд', { n: poem.views?.length || 0 }) }}
       </div>
     </div>
 
@@ -48,7 +48,7 @@
     </div>
 
     <div v-if="poem.user" class="mb-12">
-      <div class="section-title">Иловакунандаи шеър</div>
+      <div class="section-title">{{ $t('Иловакунандаи шеър') }}</div>
       <router-link :to="'/users/' + poem.user.id" class="flex w-full items-center gap-4 p-4 bg-surface-2 hover:bg-gold/10 rounded-2xl transition-all group decoration-transparent border border-border">
         <div class="bg-white p-2 rounded-xl shadow-sm group-hover:shadow-indigo/10 transition-all">
           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" class="text-indigo group-hover:text-gold transition-colors" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
@@ -61,10 +61,10 @@
 
     <!-- Dictionary search -->
     <div class="mb-12">
-      <div class="section-title">Луғат ва калимаҳои душворфаҳм</div>
+      <div class="section-title">{{ $t('Луғат ва калимаҳои душворфаҳм') }}</div>
       <div class="flex gap-2">
-        <input v-model="vocabQuery" @keyup.enter="searchVocab" class="input-base flex-1" placeholder="калимаро нависед...">
-        <button @click="searchVocab" class="btn btn-gold">Маъно</button>
+        <input v-model="vocabQuery" @keyup.enter="searchVocab" class="input-base flex-1" :placeholder="$t('калимаро нависед...')">
+        <button @click="searchVocab" class="btn btn-gold">{{ $t('Маъно') }}</button>
       </div>
       <div v-show="showVocab" class="mt-6 rounded-2xl overflow-hidden shadow-2xl border border-border">
         <iframe :src="vocabUrl" class="w-full h-[480px] border-0 bg-white" loading="lazy"></iframe>
@@ -76,21 +76,21 @@
       <router-link :to="{ path: '/ai', query: { query: normalizeBreaks(poem.content) } }" class="decoration-transparent">
         <button class="btn btn-outline w-full md:w-auto py-4">
           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/></svg>
-          Маънои шеър (AI Шарҳ)
+          {{ $t('Маънои шеър (AI Шарҳ)') }}
         </button>
       </router-link>
     </div>
 
     <!-- Comments -->
     <div class="mb-12">
-      <div class="section-title">Шарҳҳо</div>
+      <div class="section-title">{{ $t('Шарҳҳо') }}</div>
       <div class="space-y-4">
-        <div v-if="poem.comments?.length === 0" class="text-text-faint text-sm italic py-4">Ҳоло шарҳе нест.</div>
+        <div v-if="poem.comments?.length === 0" class="text-text-faint text-sm italic py-4">{{ $t('Ҳоло шарҳе нест.') }}</div>
         <div v-for="comment in poem.comments || []" :key="comment.id" class="bg-surface-2 p-5 rounded-2xl border border-border group transition-all hover:bg-white hover:shadow-md">
           <div class="flex items-center gap-3 mb-2">
             <PoetAvatar :src="null" size="28" />
             <router-link v-if="comment.user" :to="'/users/' + comment.user.id" class="text-sm font-bold text-text-main hover:text-gold transition-colors decoration-transparent">{{ comment.user.name }}</router-link>
-            <span v-else class="text-sm font-bold text-text-main">Хонанда</span>
+            <span v-else class="text-sm font-bold text-text-main">{{ $t('Хонанда') }}</span>
           </div>
           <p class="text-[0.95rem] text-gray-700 leading-relaxed">{{ comment.text }}</p>
         </div>
@@ -98,10 +98,10 @@
 
       <!-- Comment form -->
       <div class="mt-8 bg-surface p-6 rounded-2xl border border-indigo/10 shadow-sm shadow-indigo/5">
-        <div class="text-[0.7rem] font-black uppercase tracking-widest text-indigo mb-4">Назари худро нависед</div>
-        <textarea v-model="newComment" class="input-base min-h-[120px]" placeholder="Фикратонро нависед..."></textarea>
+        <div class="text-[0.7rem] font-black uppercase tracking-widest text-indigo mb-4">{{ $t('Назари худро нависед') }}</div>
+        <textarea v-model="newComment" class="input-base min-h-[120px]" :placeholder="$t('Фикратонро нависед...')"></textarea>
         <div class="mt-4 flex justify-end">
-          <button @click="submitComment" class="btn btn-indigo px-8">Фиристодан</button>
+          <button @click="submitComment" class="btn btn-indigo px-8">{{ $t('Фиристодан') }}</button>
         </div>
       </div>
     </div>
@@ -116,8 +116,8 @@
           {{ poem.poet.name }}
         </router-link>
         <div class="flex flex-wrap justify-center md:justify-start gap-4 mt-4">
-          <button class="btn btn-gold px-8 py-2.5">Обуна шудан +</button>
-          <router-link :to="'/poets/' + poem.poet.id" class="btn btn-outline px-6 py-2.5">Саҳифаи шоир</router-link>
+          <button class="btn btn-gold px-8 py-2.5">{{ $t('Обуна шудан +') }}</button>
+          <router-link :to="'/poets/' + poem.poet.id" class="btn btn-outline px-6 py-2.5">{{ $t('Саҳифаи шоир') }}</router-link>
         </div>
       </div>
     </div>
@@ -126,7 +126,7 @@
     <div v-if="similarPoems.length > 0" class="mt-20">
       <div class="section-title mb-8 flex items-center gap-3">
         <span class="w-1.5 h-6 bg-gold rounded-full"></span>
-        Шеърҳои монанд
+        {{ $t('Шеърҳои монанд') }}
       </div>
       
       <div class="space-y-6">
@@ -147,7 +147,7 @@
               <span v-for="tag in p.tags.split(',').filter(t => t.trim())" :key="tag" class="text-[0.65rem] font-bold uppercase tracking-widest px-2.5 py-1 bg-surface-2 text-text-muted rounded-md border border-border/50">#{{ tag.trim() }}</span>
             </div>
 
-            <span class="inline-block mt-4 text-[0.8rem] font-bold text-indigo group-hover:underline uppercase tracking-wider">Муфассал хонед →</span>
+            <span class="inline-block mt-4 text-[0.8rem] font-bold text-indigo group-hover:underline uppercase tracking-wider">{{ $t('Муфассал хонед →') }}</span>
           </router-link>
 
           <div class="mt-6 pt-5 border-t border-border flex items-center justify-between">
@@ -168,6 +168,7 @@
 </template>
 
 <script setup>
+import { t } from '../i18n'
 import { ref, onMounted, computed, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import { useAuthStore } from '../stores/auth'
@@ -220,7 +221,7 @@ const fetchPoem = async () => {
 
 const toggleLikeSimilar = async (p) => {
   if (!authStore.isAuthenticated) {
-    alert('Лутфан аввал ба система ворид шавед.')
+    alert(t('Лутфан аввал ба система ворид шавед.'))
     return
   }
   
@@ -261,7 +262,7 @@ const handleLike = async () => {
   likeCount.value += hasLiked.value ? 1 : -1
 
   if (!authStore.isAuthenticated) {
-    alert('Лутфан аввал ба система ворид шавед.')
+    alert(t('Лутфан аввал ба система ворид шавед.'))
     return
   }
 
@@ -286,13 +287,13 @@ const handleLike = async () => {
 
 const submitComment = async () => {
   if (!authStore.isAuthenticated) {
-    alert('Лутфан аввал ба система ворид шавед.')
+    alert(t('Лутфан аввал ба система ворид шавед.'))
     return
   }
   if (!newComment.value.trim()) return
   const text = newComment.value.trim()
   poem.value.comments = poem.value.comments || []
-  poem.value.comments.push({ id: Date.now(), text, user: { name: authStore.user?.name || 'Шумо' } })
+  poem.value.comments.push({ id: Date.now(), text, user: { name: authStore.user?.name || t('Шумо') } })
   newComment.value = ''
   try {
     await fetch(`${API_URL}/api/poems/${poem.value.id}/comment`, {

@@ -6,9 +6,9 @@
       <div class="absolute -bottom-24 -left-24 w-48 h-48 bg-gold/10 rounded-full blur-3xl"></div>
 
       <div class="relative z-10">
-        <h2 class="text-center text-4xl font-serif font-bold text-text-main">Хуш омадед</h2>
+        <h2 class="text-center text-4xl font-serif font-bold text-text-main">{{ $t('Хуш омадед') }}</h2>
         <p class="mt-2 text-center text-sm font-bold uppercase tracking-widest text-text-faint">
-          {{ isLogin ? 'Ба ҳисоби худ ворид шавед' : 'Ҳисоби нав созед' }}
+          {{ isLogin ? $t('Ба ҳисоби худ ворид шавед') : $t('Ҳисоби нав созед') }}
         </p>
       </div>
 
@@ -17,27 +17,27 @@
           @click="isLogin = true" 
           class="flex-1 py-2.5 text-xs font-black uppercase tracking-widest rounded-lg transition-all"
           :class="isLogin ? 'bg-white shadow-sm text-indigo' : 'text-text-faint hover:text-text-main'">
-          Вуруд
+          {{ $t('Вуруд') }}
         </button>
         <button 
           @click="isLogin = false" 
           class="flex-1 py-2.5 text-xs font-black uppercase tracking-widest rounded-lg transition-all"
           :class="!isLogin ? 'bg-white shadow-sm text-indigo' : 'text-text-faint hover:text-text-main'">
-          Бақайдгирӣ
+          {{ $t('Бақайдгирӣ') }}
         </button>
       </div>
 
       <form class="space-y-6 relative z-10" @submit.prevent="handleSubmit">
         <div v-if="!isLogin" class="space-y-2">
-          <label class="text-[0.65rem] font-black text-indigo uppercase tracking-widest ml-1">Ном ва насаб</label>
+          <label class="text-[0.65rem] font-black text-indigo uppercase tracking-widest ml-1">{{ $t('Ном ва насаб') }}</label>
           <div class="relative">
             <svg class="absolute left-4 top-1/2 -translate-y-1/2 text-text-faint" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-            <input v-model="form.name" type="text" required class="input-base !pl-12 rounded-2xl w-full" placeholder="Номи худро ворид кунед" />
+            <input v-model="form.name" type="text" required class="input-base !pl-12 rounded-2xl w-full" :placeholder="$t('Номи худро ворид кунед')" />
           </div>
         </div>
 
         <div class="space-y-2">
-          <label class="text-[0.65rem] font-black text-indigo uppercase tracking-widest ml-1">Почтаи электронӣ</label>
+          <label class="text-[0.65rem] font-black text-indigo uppercase tracking-widest ml-1">{{ $t('Почтаи электронӣ') }}</label>
           <div class="relative">
             <svg class="absolute left-4 top-1/2 -translate-y-1/2 text-text-faint" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
             <input v-model="form.email" type="email" required class="input-base !pl-12 rounded-2xl w-full" placeholder="email@example.com" />
@@ -45,7 +45,7 @@
         </div>
 
         <div class="space-y-2">
-          <label class="text-[0.65rem] font-black text-indigo uppercase tracking-widest ml-1">Парол</label>
+          <label class="text-[0.65rem] font-black text-indigo uppercase tracking-widest ml-1">{{ $t('Парол') }}</label>
           <div class="relative">
             <svg class="absolute left-4 top-1/2 -translate-y-1/2 text-text-faint" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
             <input v-model="form.password" type="password" required class="input-base !pl-12 rounded-2xl w-full" placeholder="••••••••" />
@@ -58,7 +58,7 @@
 
         <button type="submit" :disabled="loading" class="btn btn-indigo w-full py-4 text-base rounded-2xl">
           <span v-if="loading" class="animate-spin h-5 w-5 border-2 border-white/30 border-t-white rounded-full mr-2"></span>
-          {{ loading ? 'Лутфан интизор шавед...' : (isLogin ? 'Вуруд ба система' : 'Бақайдгирӣ') }}
+          {{ loading ? $t('Лутфан интизор шавед...') : (isLogin ? $t('Вуруд ба система') : $t('Бақайдгирӣ')) }}
         </button>
       </form>
     </div>

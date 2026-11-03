@@ -12,7 +12,7 @@
     </div>
   </div>
 
-  <div v-else-if="!poet" class="empty-state"><p>Шоир ёфт нашуд.</p></div>
+  <div v-else-if="!poet" class="empty-state"><p>{{ $t('Шоир ёфт нашуд.') }}</p></div>
 
   <div v-else>
     <!-- Poet hero -->
@@ -22,12 +22,12 @@
       <div class="flex-1 text-center md:text-left">
         <h1 class="font-serif text-3xl md:text-4xl font-bold text-text mb-2 tracking-tight">{{ poet.name }}</h1>
         <div class="inline-flex items-center px-3 py-1 bg-gold-light text-gold text-xs font-bold uppercase tracking-widest rounded-full border border-gold/20">
-          {{ poet.category || 'Шоир' }}
+          {{ poet.category || $t('Шоир') }}
         </div>
         
         <div class="mt-4 flex flex-wrap justify-center md:justify-start gap-4">
           <button class="btn btn-gold px-8 py-3 text-sm transition-all" @click="subscribe">
-            Обуна шудан +
+            {{ $t('Обуна шудан +') }}
           </button>
         </div>
       </div>
@@ -37,23 +37,23 @@
     <div class="grid grid-cols-2 gap-3 md:gap-4 mb-8">
       <div class="bg-surface rounded-xl p-3 md:p-5 border border-border shadow-sm text-center">
         <div class="text-xl md:text-2xl font-bold text-indigo">{{ poet.subscriptions?.length || 0 }}</div>
-        <div class="text-[0.6rem] md:text-[0.7rem] font-bold text-text-faint uppercase tracking-wider mt-1">Обунагирон</div>
+        <div class="text-[0.6rem] md:text-[0.7rem] font-bold text-text-faint uppercase tracking-wider mt-1">{{ $t('Обунагирон') }}</div>
       </div>
       <div class="bg-surface rounded-xl p-3 md:p-5 border border-border shadow-sm text-center">
         <div class="text-xl md:text-2xl font-bold text-indigo">{{ totalLikes }}</div>
-        <div class="text-[0.6rem] md:text-[0.7rem] font-bold text-text-faint uppercase tracking-wider mt-1">Лайкҳо</div>
+        <div class="text-[0.6rem] md:text-[0.7rem] font-bold text-text-faint uppercase tracking-wider mt-1">{{ $t('Лайкҳо') }}</div>
       </div>
     </div>
 
     <!-- Bio -->
     <div class="glass-card rounded-2xl p-6 mb-10" v-if="poet.bio">
-      <div class="text-[0.65rem] font-bold text-gold uppercase tracking-[0.2em] mb-3">Дар бораи шоир</div>
+      <div class="text-[0.65rem] font-bold text-gold uppercase tracking-[0.2em] mb-3">{{ $t('Дар бораи шоир') }}</div>
       <p class="font-serif text-[1.1rem] leading-[1.8] text-text-muted italic">
         "{{ bioSnippet }}"
       </p>
       <div class="mt-4">
         <router-link :to="'/poets/' + poet.id + '/bio'" class="text-indigo font-bold text-sm hover:underline flex items-center gap-2">
-          Давомашро хонед
+          {{ $t('Давомашро хонед') }}
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
         </router-link>
       </div>
@@ -65,12 +65,12 @@
         class="px-6 py-2 rounded-xl text-xs font-black uppercase tracking-widest transition-all"
         :class="filter === 'popular' ? 'bg-white text-indigo shadow-sm' : 'text-text-faint hover:text-text-muted'"
         @click="filter = 'popular'"
-      >Машҳур</button>
+      >{{ $t('Машҳур') }}</button>
       <button 
         class="px-6 py-2 rounded-xl text-xs font-black uppercase tracking-widest transition-all"
         :class="filter === 'recent' ? 'bg-white text-indigo shadow-sm' : 'text-text-faint hover:text-text-muted'"
         @click="filter = 'recent'"
-      >Навтарин</button>
+      >{{ $t('Навтарин') }}</button>
       <button 
         v-for="genre in availableGenres" :key="genre"
         class="px-6 py-2 rounded-xl text-xs font-black uppercase tracking-widest transition-all"
@@ -80,7 +80,7 @@
     </div>
 
     <!-- Poems list -->
-    <div v-if="filteredPoems.length === 0" class="empty-state"><p>Шеъре нест...</p></div>
+    <div v-if="filteredPoems.length === 0" class="empty-state"><p>{{ $t('Шеъре нест...') }}</p></div>
     <div
       v-for="poem in filteredPoems"
       :key="poem.id"
@@ -99,7 +99,7 @@
           <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="group-hover:text-heart transition-colors"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2.1C10.5 3.5 9.26 3 7.5 3A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
           {{ poem.likes?.length || 0 }}
         </div>
-        <router-link :to="'/poems/' + poem.id" class="text-[0.7rem] font-black text-indigo uppercase tracking-widest hover:underline">Муфассал хонед →</router-link>
+        <router-link :to="'/poems/' + poem.id" class="text-[0.7rem] font-black text-indigo uppercase tracking-widest hover:underline">{{ $t('Муфассал хонед →') }}</router-link>
       </div>
     </div>
   </div>

@@ -2,13 +2,13 @@
   <div class="pb-20">
     <!-- Search Section -->
     <div class="mb-12">
-      <h1 class="text-3xl font-serif font-bold text-text-main mb-6">Каталог ва ҷустуҷӯ</h1>
+      <h1 class="text-3xl font-serif font-bold text-text-main mb-6">{{ $t('Каталог ва ҷустуҷӯ') }}</h1>
       <div class="relative group">
         <input 
           v-model="searchQuery"
           @keyup.enter="handleSearch"
           type="text" 
-          placeholder="Ҷустуҷӯи шеърҳо, шоирон ё мавзӯъҳо..." 
+          :placeholder="$t('Ҷустуҷӯи шеърҳо, шоирон ё мавзӯъҳо...')" 
           class="w-full bg-surface border border-border rounded-2xl py-4 pl-14 pr-6 text-base font-medium transition-all focus:outline-none focus:ring-4 focus:ring-indigo/10 focus:border-indigo group-hover:border-indigo/30 shadow-sm"
         >
         <div class="absolute left-5 top-1/2 -translate-y-1/2 text-text-faint group-focus-within:text-indigo transition-colors">
@@ -18,7 +18,7 @@
           @click="handleSearch"
           class="absolute right-3 top-1/2 -translate-y-1/2 px-5 py-2 bg-indigo text-white rounded-xl font-bold text-xs uppercase tracking-widest shadow-lg shadow-indigo/20 hover:scale-105 active:scale-95 transition-all"
         >
-          Ҷустуҷӯ
+          {{ $t('Ҷустуҷӯ') }}
         </button>
       </div>
     </div>
@@ -27,7 +27,7 @@
     <div class="mb-16">
       <div class="flex items-center gap-3 mb-6">
         <div class="w-1.5 h-6 bg-gold rounded-full"></div>
-        <h2 class="text-xl font-bold text-text-main">Мавзӯъҳои маъмул</h2>
+        <h2 class="text-xl font-bold text-text-main">{{ $t('Мавзӯъҳои маъмул') }}</h2>
       </div>
       
       <div v-if="tagsLoading" class="flex flex-wrap gap-2 animate-pulse">
@@ -49,7 +49,7 @@
     <div>
       <div class="flex items-center gap-3 mb-8">
         <div class="w-1.5 h-6 bg-gold rounded-full"></div>
-        <h2 class="text-xl font-bold text-text-main">Рӯйхати адибон</h2>
+        <h2 class="text-xl font-bold text-text-main">{{ $t('Рӯйхати адибон') }}</h2>
       </div>
 
       <div v-if="loading" class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -73,7 +73,7 @@
             <PoetAvatar :src="poet.avatar" :alt="poet.name" size="56" class="shadow-sm border-2 border-white group-hover:scale-110 transition-transform duration-500" />
             <div>
               <div class="font-serif text-lg font-bold text-text-main group-hover:text-gold transition-colors">{{ poet.name }}</div>
-              <div class="text-[0.65rem] font-black text-text-faint uppercase tracking-[0.15em] mt-1 group-hover:text-indigo transition-colors">{{ poet.category || 'Шоир' }}</div>
+              <div class="text-[0.65rem] font-black text-text-faint uppercase tracking-[0.15em] mt-1 group-hover:text-indigo transition-colors">{{ poet.category || $t('Шоир') }}</div>
             </div>
             <div class="ml-auto p-2.5 rounded-2xl bg-surface-2 group-hover:bg-gold group-hover:text-white transition-all text-text-faint shadow-inner">
               <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>

@@ -2,8 +2,8 @@
   <div class="space-y-8">
     <div class="flex flex-col md:flex-row md:items-center justify-between gap-6">
       <div>
-        <h2 class="text-3xl font-serif font-bold text-text-main mb-2">Адибон</h2>
-        <p class="text-xs font-bold text-text-faint uppercase tracking-widest">Идоракунии профилҳои адибон</p>
+        <h2 class="text-3xl font-serif font-bold text-text-main mb-2">{{ $t('Адибон') }}</h2>
+        <p class="text-xs font-bold text-text-faint uppercase tracking-widest">{{ $t('Идоракунии профилҳои адибон') }}</p>
       </div>
       <div class="flex items-center gap-3">
         <div class="relative">
@@ -11,13 +11,13 @@
           <input 
             v-model="searchQuery" 
             type="text" 
-            placeholder="Ҷустуҷӯ..." 
+            :placeholder="$t('Ҷустуҷӯ...')" 
             class="input-base pl-12 rounded-2xl w-full md:w-64"
           />
         </div>
         <button @click="openAdd" class="btn btn-indigo whitespace-nowrap hidden md:flex items-center gap-2">
           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
-          Иловаи адиб
+          {{ $t('Иловаи адиб') }}
         </button>
       </div>
     </div>
@@ -28,10 +28,10 @@
         <table class="w-full text-left">
           <thead>
             <tr class="bg-gray-50/50 border-b border-border">
-              <th class="px-8 py-5 text-[0.65rem] font-black text-indigo uppercase tracking-widest">Акс</th>
-              <th class="px-8 py-5 text-[0.65rem] font-black text-indigo uppercase tracking-widest">Адиб</th>
-              <th class="px-8 py-5 text-[0.65rem] font-black text-indigo uppercase tracking-widest">Категория</th>
-              <th class="px-8 py-5 text-[0.65rem] font-black text-indigo uppercase tracking-widest text-right">Амалҳо</th>
+              <th class="px-8 py-5 text-[0.65rem] font-black text-indigo uppercase tracking-widest">{{ $t('Акс') }}</th>
+              <th class="px-8 py-5 text-[0.65rem] font-black text-indigo uppercase tracking-widest">{{ $t('Адиб') }}</th>
+              <th class="px-8 py-5 text-[0.65rem] font-black text-indigo uppercase tracking-widest">{{ $t('Категория') }}</th>
+              <th class="px-8 py-5 text-[0.65rem] font-black text-indigo uppercase tracking-widest text-right">{{ $t('Амалҳо') }}</th>
             </tr>
           </thead>
           <tbody class="divide-y divide-border/50">
@@ -65,37 +65,37 @@
       </div>
       <div v-if="loading" class="p-20 flex flex-col items-center justify-center text-text-faint gap-4">
         <span class="animate-spin h-8 w-8 border-4 border-indigo/20 border-t-indigo rounded-full"></span>
-        <span class="text-xs font-bold uppercase tracking-widest">Боргузорӣ...</span>
+        <span class="text-xs font-bold uppercase tracking-widest">{{ $t('Боргузорӣ...') }}</span>
       </div>
       <div v-else-if="filteredPoets.length === 0" class="p-20 text-center text-text-faint">
-        Адиб ёфт нашуд.
+        {{ $t('Адиб ёфт нашуд.') }}
       </div>
     </div>
 
     <!-- Add/Edit Modal Form -->
     <BaseModal v-model="isFormModalOpen" maxWidth="4xl">
       <template #header>
-        <h3 class="text-xl font-serif font-bold text-text-main">{{ isEditMode ? 'Таҳрири адиб' : 'Иловаи адиб' }}</h3>
+        <h3 class="text-xl font-serif font-bold text-text-main">{{ isEditMode ? $t('Таҳрири адиб') : $t('Иловаи адиб') }}</h3>
       </template>
 
       <form @submit.prevent="handleSave" class="space-y-6">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div class="space-y-3">
-            <label class="block text-[0.65rem] font-black text-indigo uppercase tracking-widest ml-1">Ному насаб</label>
-            <input v-model="form.name" type="text" placeholder="Масалан: Ҷалолуддини Румӣ" class="input-base" required />
+            <label class="block text-[0.65rem] font-black text-indigo uppercase tracking-widest ml-1">{{ $t('Ному насаб') }}</label>
+            <input v-model="form.name" type="text" :placeholder="$t('Масалан: Ҷалолуддини Румӣ')" class="input-base" required />
           </div>
           <div class="space-y-3">
-            <label class="block text-[0.65rem] font-black text-indigo uppercase tracking-widest ml-1">Жанр / Категория</label>
-            <input v-model="form.category" type="text" placeholder="Масалан: Классик" class="input-base" required />
+            <label class="block text-[0.65rem] font-black text-indigo uppercase tracking-widest ml-1">{{ $t('Жанр / Категория') }}</label>
+            <input v-model="form.category" type="text" :placeholder="$t('Масалан: Классик')" class="input-base" required />
           </div>
           <div class="space-y-3 md:col-span-2">
-            <label class="block text-[0.65rem] font-black text-indigo uppercase tracking-widest ml-1">Давраи ҳаёт</label>
-            <input v-model="form.lifetime" type="text" placeholder="Масалан: 1207 - 1273" class="input-base" />
+            <label class="block text-[0.65rem] font-black text-indigo uppercase tracking-widest ml-1">{{ $t('Давраи ҳаёт') }}</label>
+            <input v-model="form.lifetime" type="text" :placeholder="$t('Масалан: 1207 - 1273')" class="input-base" />
           </div>
         </div>
 
         <div class="space-y-4">
-          <label class="block text-[0.65rem] font-black text-indigo uppercase tracking-widest ml-1">Акс</label>
+          <label class="block text-[0.65rem] font-black text-indigo uppercase tracking-widest ml-1">{{ $t('Акс') }}</label>
           <div 
             class="relative border-2 border-dashed border-border rounded-2xl p-6 text-center transition-all hover:border-gold group cursor-pointer overflow-hidden min-h-[160px] flex flex-col items-center justify-center"
             @click="$refs.fileInput.click()"
@@ -107,21 +107,21 @@
             <input type="file" ref="fileInput" class="hidden" accept="image/*" @change="handleFileSelect" />
             <div v-if="!form.avatar" class="space-y-3">
               <svg class="mx-auto" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg>
-              <p class="text-sm font-bold text-text-main">Аксро кашола кунед ё интихоб намоед</p>
+              <p class="text-sm font-bold text-text-main">{{ $t('Аксро кашола кунед ё интихоб намоед') }}</p>
             </div>
             <div v-else class="flex flex-col items-center gap-3">
               <img :src="form.avatar" class="w-20 h-20 rounded-full object-cover border-4 border-white shadow-xl" />
-              <button @click.stop="form.avatar = null" class="text-[0.65rem] font-black text-heart uppercase tracking-widest hover:underline">Тоза кардан</button>
+              <button @click.stop="form.avatar = null" class="text-[0.65rem] font-black text-heart uppercase tracking-widest hover:underline">{{ $t('Тоза кардан') }}</button>
             </div>
           </div>
         </div>
 
         <div class="space-y-4">
           <div class="flex items-center justify-between">
-            <label class="block text-[0.65rem] font-black text-indigo uppercase tracking-widest ml-1">Тарҷумаи ҳол</label>
+            <label class="block text-[0.65rem] font-black text-indigo uppercase tracking-widest ml-1">{{ $t('Тарҷумаи ҳол') }}</label>
             <div class="flex bg-surface-2 rounded-lg p-1">
-              <button type="button" @click="editorMode = 'write'" class="px-4 py-1.5 text-[0.65rem] font-black uppercase tracking-widest rounded-md transition-all" :class="editorMode === 'write' ? 'bg-white text-indigo shadow-sm' : 'text-text-faint'">Навиштан</button>
-              <button type="button" @click="editorMode = 'preview'" class="px-4 py-1.5 text-[0.65rem] font-black uppercase tracking-widest rounded-md transition-all" :class="editorMode === 'preview' ? 'bg-white text-indigo shadow-sm' : 'text-text-faint'">Пешнамоиш</button>
+              <button type="button" @click="editorMode = 'write'" class="px-4 py-1.5 text-[0.65rem] font-black uppercase tracking-widest rounded-md transition-all" :class="editorMode === 'write' ? 'bg-white text-indigo shadow-sm' : 'text-text-faint'">{{ $t('Навиштан') }}</button>
+              <button type="button" @click="editorMode = 'preview'" class="px-4 py-1.5 text-[0.65rem] font-black uppercase tracking-widest rounded-md transition-all" :class="editorMode === 'preview' ? 'bg-white text-indigo shadow-sm' : 'text-text-faint'">{{ $t('Пешнамоиш') }}</button>
             </div>
           </div>
           
@@ -135,10 +135,10 @@
       </form>
 
       <template #footer>
-        <button @click="isFormModalOpen = false" class="btn btn-outline">Бекор кардан</button>
+        <button @click="isFormModalOpen = false" class="btn btn-outline">{{ $t('Бекор кардан') }}</button>
         <button @click="handleSave" :disabled="saving" class="btn btn-indigo">
           <span v-if="saving" class="animate-spin h-4 w-4 border-2 border-white/30 border-t-white rounded-full"></span>
-          {{ saving ? 'Ҳифз...' : 'Ҳифз кардан' }}
+          {{ saving ? $t('Ҳифз...') : $t('Ҳифз кардан') }}
         </button>
       </template>
     </BaseModal>
@@ -149,13 +149,13 @@
         <div class="w-12 h-12 rounded-full bg-heart/10 flex items-center justify-center text-heart mb-4 mx-auto">
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/><line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/></svg>
         </div>
-        <h3 class="text-xl font-bold text-center text-text-main">Нест кардани адиб</h3>
+        <h3 class="text-xl font-bold text-center text-text-main">{{ $t('Нест кардани адиб') }}</h3>
       </template>
-      <p class="text-center text-text-muted">Оё шумо мутмаин ҳастед, ки мехоҳед маълумоти <strong>{{ activePoet?.name || 'ин адиб' }}</strong>-ро нест кунед? Ин амалро баргардонда намешавад.</p>
+      <p class="text-center text-text-muted">{{ $t('Оё шумо мутмаин ҳастед, ки мехоҳед маълумоти') }} <strong>{{ activePoet?.name || $t('ин адиб') }}</strong>{{ $t('-ро нест кунед? Ин амалро баргардонда намешавад.') }}</p>
       <template #footer>
-        <button @click="isDeleteModalOpen = false" class="btn btn-outline flex-1">Бекор кардан</button>
+        <button @click="isDeleteModalOpen = false" class="btn btn-outline flex-1">{{ $t('Бекор кардан') }}</button>
         <button @click="handleDelete" :disabled="saving" class="btn bg-heart text-white hover:bg-red-700 flex-1">
-          {{ saving ? 'Нест карда истодааст...' : 'Ҳа, нест кун' }}
+          {{ saving ? $t('Нест карда истодааст...') : $t('Ҳа, нест кун') }}
         </button>
       </template>
     </BaseModal>
@@ -163,6 +163,7 @@
 </template>
 
 <script setup>
+import { t } from '../../i18n'
 import { ref, onMounted, computed } from 'vue'
 import { API_URL } from '../../config'
 import { normalizeBreaks, escapeHtml } from '../../utils/text'
@@ -211,7 +212,7 @@ const filteredPoets = computed(() => {
 })
 
 const parsedBio = computed(() => {
-  if (!form.value.bio) return '<span class="text-text-faint">Матне барои пешнамоиш нест...</span>'
+  if (!form.value.bio) return '<span class="text-text-faint">' + t('Матне барои пешнамоиш нест...') + '</span>'
   return escapeHtml(normalizeBreaks(form.value.bio)).replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>').replace(/\*([^*]+)\*/g, '<em>$1</em>').replace(/\n/g, '<br>')
 })
 

@@ -1,7 +1,7 @@
 <template>
   <div class="mb-8 pb-6 border-b border-border">
-    <h1 class="text-2xl font-bold text-text-main">Шеърҳои нав</h1>
-    <p class="text-sm text-text-muted mt-1">Тозатарин шеърҳо аз шоирони тоҷик</p>
+    <h1 class="text-2xl font-bold text-text-main">{{ $t('Шеърҳои нав') }}</h1>
+    <p class="text-sm text-text-muted mt-1">{{ $t('Тозатарин шеърҳо аз шоирони тоҷик') }}</p>
   </div>
 
   <!-- Advanced combined Filters -->
@@ -16,10 +16,10 @@
           <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
         </div>
         <div>
-          <div class="text-[0.65rem] font-black uppercase tracking-[0.2em] text-indigo/60 mb-0.5">Филтрҳои ҷустуҷӯ</div>
+          <div class="text-[0.65rem] font-black uppercase tracking-[0.2em] text-indigo/60 mb-0.5">{{ $t('Филтрҳои ҷустуҷӯ') }}</div>
           <div class="text-sm font-bold text-text-main flex items-center gap-2">
-            Интихоби шеърҳо
-            <span v-if="hasActiveFilters" class="px-2 py-0.5 bg-gold text-white text-[0.6rem] font-black rounded-full shadow-sm">{{ activeFiltersCount }} фаъол</span>
+            {{ $t('Интихоби шеърҳо') }}
+            <span v-if="hasActiveFilters" class="px-2 py-0.5 bg-gold text-white text-[0.6rem] font-black rounded-full shadow-sm">{{ $t('{n} фаъол', { n: activeFiltersCount }) }}</span>
           </div>
         </div>
       </div>
@@ -34,7 +34,7 @@
         <!-- Author Filter -->
         <div class="relative group">
           <select v-model="filters.poetId" class="filter-select">
-            <option :value="null">Ҳамаи муаллифон</option>
+            <option :value="null">{{ $t('Ҳамаи муаллифон') }}</option>
             <option v-for="p in metadata.poets" :key="p.id" :value="p.id">{{ p.name }}</option>
           </select>
           <div class="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-text-faint group-hover:text-gold transition-colors">
@@ -45,7 +45,7 @@
         <!-- Genre Filter -->
         <div class="relative group">
           <select v-model="filters.genre" class="filter-select">
-            <option :value="null">Ҳамаи жанрҳо</option>
+            <option :value="null">{{ $t('Ҳамаи жанрҳо') }}</option>
             <option v-for="g in metadata.genres" :key="g" :value="g">{{ g }}</option>
           </select>
           <div class="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-text-faint group-hover:text-gold transition-colors">
@@ -56,7 +56,7 @@
         <!-- Tag Filter -->
         <div class="relative group">
           <select v-model="filters.tag" class="filter-select">
-            <option :value="null">Ҳамаи мавзӯъҳо</option>
+            <option :value="null">{{ $t('Ҳамаи мавзӯъҳо') }}</option>
             <option v-for="t in metadata.tags" :key="t" :value="t">{{ t }}</option>
           </select>
           <div class="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-text-faint group-hover:text-gold transition-colors">
@@ -68,10 +68,10 @@
       <!-- Active Filter Indicator -->
       <div v-if="hasActiveFilters" class="mt-6 flex items-center justify-between pt-4 border-t border-border/50">
         <div class="text-[0.65rem] font-bold text-indigo italic">
-          Шумораи натиҷаҳо: {{ filteredPoems.length }}
+          {{ $t('Шумораи натиҷаҳо: {n}', { n: filteredPoems.length }) }}
         </div>
         <button @click="resetFilters" class="text-[0.65rem] font-black uppercase tracking-widest text-heart hover:underline flex items-center gap-1.5">
-          Тоза кардани филтр
+          {{ $t('Тоза кардани филтр') }}
           <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m15 9-6 6"/><path d="m9 9 6 6"/></svg>
         </button>
       </div>
@@ -94,8 +94,8 @@
   <div v-else-if="filteredPoems.length === 0" class="empty-state">
     <div class="bg-surface-2 p-10 rounded-[3rem] text-center border-2 border-dashed border-border mb-10">
       <svg class="mx-auto mb-6 text-text-faint" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-      <p class="text-text-main font-bold text-lg mb-2">Шеър ёфт нашуд</p>
-      <p class="text-text-faint text-sm">Бо ин филтрҳо ягон шеър ёфт нашуд. Филтрҳоро тағйир диҳед.</p>
+      <p class="text-text-main font-bold text-lg mb-2">{{ $t('Шеър ёфт нашуд') }}</p>
+      <p class="text-text-faint text-sm">{{ $t('Бо ин филтрҳо ягон шеър ёфт нашуд. Филтрҳоро тағйир диҳед.') }}</p>
     </div>
   </div>
 
@@ -118,7 +118,7 @@
           <span v-for="tag in poem.tags.split(',').filter(t => t.trim())" :key="tag" class="text-[0.65rem] font-bold uppercase tracking-widest px-2.5 py-1 bg-surface-2 text-text-muted rounded-md border border-border/50">#{{ tag.trim() }}</span>
         </div>
 
-        <span class="inline-block mt-4 text-[0.8rem] font-bold text-indigo group-hover:underline uppercase tracking-wider">Муфассал хонед →</span>
+        <span class="inline-block mt-4 text-[0.8rem] font-bold text-indigo group-hover:underline uppercase tracking-wider">{{ $t('Муфассал хонед →') }}</span>
       </router-link>
 
       <div class="mt-6 pt-5 border-t border-border flex items-center justify-between">

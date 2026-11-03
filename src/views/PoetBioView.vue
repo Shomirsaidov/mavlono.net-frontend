@@ -11,7 +11,7 @@
   </div>
 
   <div v-else-if="!poet" class="empty-state">
-    <p>Шоир ёфт нашуд.</p>
+    <p>{{ $t('Шоир ёфт нашуд.') }}</p>
   </div>
 
   <div v-else class="max-w-3xl mx-auto pb-20">
@@ -26,13 +26,13 @@
 
     <!-- Biography Content -->
     <article class="prose prose-indigo max-w-none mb-12 px-4 md:px-0">
-      <div class="section-title text-center mb-6">Тарҷумаи ҳол</div>
+      <div class="section-title text-center mb-6">{{ $t('Тарҷумаи ҳол') }}</div>
       <div v-if="poet.bio && poet.bio.length > 10" 
            class="font-serif text-lg md:text-xl leading-[1.75] text-gray-800 whitespace-pre-line first-letter:text-5xl first-letter:font-bold first-letter:text-indigo first-letter:mr-2 first-letter:float-left first-letter:leading-[1]"
            v-html="formattedBio">
       </div>
       <div v-else class="text-center text-text-faint italic py-10 bg-gray-50 rounded-2xl border border-dashed border-border">
-        Маълумоти бештар дар бораи ин шахсият дар ҳоли омодашавӣ аст...
+        {{ $t('Маълумоти бештар дар бораи ин шахсият дар ҳоли омодашавӣ аст...') }}
       </div>
     </article>
 
@@ -41,9 +41,9 @@
       <div class="px-4 md:px-0 flex items-center justify-between mb-5">
         <h2 class="text-lg font-bold text-text-main flex items-center gap-3">
           <span class="w-8 h-[3px] bg-gold rounded-full"></span>
-          Шеърҳои машҳур
+          {{ $t('Шеърҳои машҳур') }}
         </h2>
-        <router-link :to="'/poets/' + poet.id" class="text-[0.7rem] font-black text-indigo uppercase tracking-[0.2em] hover:underline">Ҳамааш →</router-link>
+        <router-link :to="'/poets/' + poet.id" class="text-[0.7rem] font-black text-indigo uppercase tracking-[0.2em] hover:underline">{{ $t('Ҳамааш →') }}</router-link>
       </div>
 
       <div class="flex overflow-x-auto snap-x snap-mandatory gap-4 pb-4 no-scrollbar px-4 md:px-0">
@@ -64,7 +64,7 @@
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-heart"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2.1C10.5 3.5 9.26 3 7.5 3A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
                 {{ poem.likes?.length || 0 }}
               </div>
-              <span class="text-[0.7rem] font-black text-indigo uppercase tracking-widest">Хондан →</span>
+              <span class="text-[0.7rem] font-black text-indigo uppercase tracking-widest">{{ $t('Хондан →') }}</span>
             </div>
           </router-link>
         </div>
@@ -76,7 +76,7 @@
       <div class="px-4 md:px-0 mb-5">
         <h2 class="text-lg font-bold text-text-main flex items-center gap-3">
           <span class="w-8 h-[3px] bg-gold rounded-full"></span>
-          Дигар адибон
+          {{ $t('Дигар адибон') }}
         </h2>
       </div>
 
@@ -94,7 +94,7 @@
               </div>
             </div>
             <div class="font-serif font-bold text-lg text-text-main group-hover:text-gold transition-colors line-clamp-1">{{ recommend.name }}</div>
-            <div class="text-[0.65rem] text-text-faint uppercase font-bold tracking-wider mt-1">{{ recommend.category || 'Шоир' }}</div>
+            <div class="text-[0.65rem] text-text-faint uppercase font-bold tracking-wider mt-1">{{ recommend.category || $t('Шоир') }}</div>
           </router-link>
         </div>
       </div>

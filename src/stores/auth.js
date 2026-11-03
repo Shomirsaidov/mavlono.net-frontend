@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
 import { API_URL } from '../config'
+import { t } from '../i18n'
 
 export const useAuthStore = defineStore('auth', () => {
   const user = ref(JSON.parse(localStorage.getItem('mavlono_user') || 'null'))
@@ -18,7 +19,7 @@ export const useAuthStore = defineStore('auth', () => {
       })
       if (!res.ok) {
         const errorData = await res.json()
-        throw new Error(errorData.error || 'Хатогӣ ҳангоми вуруд')
+        throw new Error(errorData.error || t('Хатогӣ ҳангоми вуруд'))
       }
       const data = await res.json()
       setAuthStatus(data.user, data.token)
@@ -37,7 +38,7 @@ export const useAuthStore = defineStore('auth', () => {
       })
       if (!res.ok) {
         const errorData = await res.json()
-        throw new Error(errorData.error || 'Хатогӣ ҳангоми бақайдгирӣ')
+        throw new Error(errorData.error || t('Хатогӣ ҳангоми бақайдгирӣ'))
       }
       const data = await res.json()
       setAuthStatus(data.user, data.token)

@@ -17,7 +17,7 @@
         <!-- Brand -->
         <div class="mb-10 px-2 flex items-center gap-3">
           <div class="w-8 h-8 rounded-lg bg-indigo flex items-center justify-center text-white font-serif font-black">M</div>
-          <span class="font-serif font-bold text-xl text-text-main">Админ</span>
+          <span class="font-serif font-bold text-xl text-text-main">{{ $t('Админ') }}</span>
         </div>
 
         <!-- Navigation -->
@@ -35,7 +35,7 @@
             @click="isMobileMenuOpen = false"
           >
             <component :is="item.icon" class="w-5 h-5 opacity-70 group-hover:opacity-100" />
-            {{ item.name }}
+            {{ $t(item.name) }}
           </router-link>
         </nav>
 
@@ -46,7 +46,7 @@
             class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-bold text-heart hover:bg-heart/5 transition-all"
           >
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
-            Хуруҷ
+            {{ $t('Хуруҷ') }}
           </button>
         </div>
       </div>

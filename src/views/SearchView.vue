@@ -3,9 +3,9 @@
     <div>
       <h1 class="text-3xl font-serif font-bold text-text-main flex items-center gap-3" id="search-title">
         <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-gold"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-        Натиҷаҳои ҷустуҷӯ
+        {{ $t('Натиҷаҳои ҷустуҷӯ') }}
       </h1>
-      <p class="text-text-muted mt-2 font-medium">Барои: <span class="italic text-indigo" id="search-query-display">"{{ query }}"</span></p>
+      <p class="text-text-muted mt-2 font-medium">{{ $t('Барои:') }} <span class="italic text-indigo" id="search-query-display">"{{ query }}"</span></p>
     </div>
     <router-link to="/catalog" class="bg-surface-2 p-2 rounded-full hover:bg-gold hover:text-white transition-all shadow-sm">
       <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5m7-7-7 7 7 7"/></svg>
@@ -32,9 +32,9 @@
     <div class="w-16 h-16 bg-white rounded-2xl shadow-sm flex items-center justify-center text-gold mb-6 border border-border">
       <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/><path d="M15 8l-8 8"/><path d="M7 8l8 8"/></svg>
     </div>
-    <p class="text-2xl font-serif font-bold text-text-main mb-3">Натиҷа ёфт нашуд</p>
-    <p class="text-text-muted max-w-xs mx-auto text-sm leading-relaxed">Мо чизе ёфта натавонистем. Лутфан калимаҳои дигарро истифода баред.</p>
-    <router-link to="/catalog" class="mt-8 px-8 py-3 bg-indigo text-white rounded-full font-bold shadow-xl shadow-indigo/20 text-sm hover:scale-105 transition-transform active:scale-95">Ба каталог баргаштан</router-link>
+    <p class="text-2xl font-serif font-bold text-text-main mb-3">{{ $t('Натиҷа ёфт нашуд') }}</p>
+    <p class="text-text-muted max-w-xs mx-auto text-sm leading-relaxed">{{ $t('Мо чизе ёфта натавонистем. Лутфан калимаҳои дигарро истифода баред.') }}</p>
+    <router-link to="/catalog" class="mt-8 px-8 py-3 bg-indigo text-white rounded-full font-bold shadow-xl shadow-indigo/20 text-sm hover:scale-105 transition-transform active:scale-95">{{ $t('Ба каталог баргаштан') }}</router-link>
   </div>
 
   <!-- Search Results Feed -->
@@ -56,7 +56,7 @@
           <span v-for="tag in poem.tags.split(',').filter(t => t.trim())" :key="tag" class="text-[0.65rem] font-bold uppercase tracking-widest px-2.5 py-1 bg-surface-2 text-text-muted rounded-md border border-border/50">#{{ tag.trim() }}</span>
         </div>
 
-        <span class="inline-block mt-4 text-[0.8rem] font-bold text-indigo group-hover:underline uppercase tracking-wider">Муфассал хонед →</span>
+        <span class="inline-block mt-4 text-[0.8rem] font-bold text-indigo group-hover:underline uppercase tracking-wider">{{ $t('Муфассал хонед →') }}</span>
       </router-link>
 
       <div class="mt-6 pt-5 border-t border-border flex items-center justify-between">
