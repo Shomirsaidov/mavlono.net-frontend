@@ -12,7 +12,7 @@
 
     <!-- Poem body -->
     <h1 class="sr-only">{{ pageTitle }}</h1>
-    <p class="font-serif text-2xl md:text-3xl leading-[1.7] text-gray-800 mb-12 whitespace-pre-line selection:bg-gold/10 italic">
+    <p class="font-serif text-xl md:text-2xl leading-[1.7] text-gray-800 mb-12 whitespace-pre-line selection:bg-gold/10 italic">
       {{ normalizeBreaks(poem.content) }}
     </p>
 

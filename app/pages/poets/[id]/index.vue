@@ -103,7 +103,7 @@ const data = await useApiRecord(`poet-${route.params.id}`, `/api/poets/${route.p
   notFoundMessage: 'Poet not found',
   // Keep the page payload small: only what the template renders.
   transform: (res) => ({
-    poet: res.poet && { ...res.poet, subscriberCount: res.poet.subscriberCount, subscriptions: undefined },
+    poet: res.poet && { ...res.poet, subscriberCount: res.poet.subscriptions?.length || 0, subscriptions: undefined },
     poems: (res.poems || []).map(p => ({
       id: p.id,
       content: poemLines(p.content, 6).join('\n'),
