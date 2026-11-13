@@ -111,7 +111,7 @@
         </router-link>
         <div class="flex flex-wrap justify-center md:justify-start gap-4 mt-4">
           <button class="btn btn-gold px-8 py-2.5">{{ $t('Обуна шудан +') }}</button>
-          <router-link :to="'/poets/' + poem.poet.id" class="btn btn-outline px-6 py-2.5">{{ $t('Саҳифаи шоир') }}</router-link>
+          <router-link :to="'/poets/' + poem.poet.id" class="btn btn-outline px-6 py-2.5">{{ $t('Шеърҳои дигари') }} {{ poem.poet.name }}</router-link>
         </div>
       </div>
     </div>

@@ -82,11 +82,30 @@
         </router-link>
       </div>
     </div>
+
+    <!-- All poems: plain server-rendered links so every poem is reachable by crawlers -->
+    <div v-if="poemGroups.length" class="mt-16">
+      <div class="flex items-center gap-3 mb-8">
+        <div class="w-1.5 h-6 bg-gold rounded-full"></div>
+        <h2 class="text-xl font-bold text-text-main">{{ $t('Ҳамаи шеърҳо') }}</h2>
+      </div>
+      <section v-for="group in poemGroups" :key="group.poet.id" class="mb-8">
+        <h3 class="font-serif text-lg font-bold mb-3">
+          <router-link :to="'/poets/' + group.poet.id" class="text-text-main hover:text-gold decoration-transparent">{{ group.poet.name }}</router-link>
+        </h3>
+        <ul class="space-y-1.5">
+          <li v-for="p in group.poems" :key="p.id">
+            <router-link :to="'/poems/' + p.id" class="text-sm text-text-muted hover:text-indigo">{{ p.title }}</router-link>
+          </li>
+        </ul>
+      </section>
+    </div>
   </div>
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
+import { poemLines, truncate } from '../utils/text'
 import { API_URL } from '../config'
 import PoetAvatar from '../components/PoetAvatar.vue'
 
@@ -95,6 +114,18 @@ const poets = await usePoets()
 const { data: popularTags } = await useAsyncData('popular-tags', () => $fetch(`${API_URL}/api/poems/tags/popular`), {
   transform: (d) => (Array.isArray(d) ? d : []),
   default: () => [],
+})
+const { data: poemIndex } = await useAsyncData('poem-index', () => $fetch(`${API_URL}/api/poems/index/all`), {
+  transform: (d) => (Array.isArray(d) ? d : []),
+  default: () => [],
+})
+const poemGroups = computed(() => {
+  const byPoet = new Map(poets.value.map(p => [p.id, { poet: p, poems: [] }]))
+  for (const p of poemIndex.value) {
+    const g = byPoet.get(p.poet_id)
+    if (g) g.poems.push({ id: p.id, title: truncate(poemLines(p.content, 1)[0] || `#${p.id}`, 70) })
+  }
+  return [...byPoet.values()].filter(g => g.poems.length)
 })
 const loading = ref(false)
 const tagsLoading = ref(false)
